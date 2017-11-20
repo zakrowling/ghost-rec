@@ -1,0 +1,256 @@
+// Variables
+
+$staticGif: "http://i.filmot.org/6oyqOt8.gif"
+$screenOne: "http://i.filmot.org/qTFppZ4.jpg"
+$screenTwo: "http://i.filmot.org/6Ap2Qtw.jpg"
+$screenThree: "http://i.filmot.org/BSbeZzr.jpg"
+$screenFour: "http://i.filmot.org/kbVKg58.jpg"
+$screenFive: "http://i.filmot.org/8lLaKCH.jpg"
+$screenSix: "http://i.filmot.org/2ZqEiIo.jpg"
+$screenSeven: "http://i.filmot.org/aH8OFCE.jpg"
+$screenEight: "http://i.filmot.org/yhvqKhq.jpg"
+$screenNine: "http://i.filmot.org/UmhBW5l.jpg"
+$screenTen: "http://i.filmot.org/zfKSqKc.jpg"
+$screenEleven: "http://i.filmot.org/a3MT70G.jpg"
+$screenTwelve: "http://i.filmot.org/8o5J5U4.jpg"
+$ghostSource: "http://www.grimmghosttours.com/images/multiple%20ghosts-crazy%20woman.png"
+
+// Colours
+$powerGreen: #2aae51
+$powerYellow: #eda00b
+$powerRed: #eb1c51
+
+@mixin prefix($property, $parameters...)
+  @each $prefix in -webkit-, -moz-, -ms-, -o-, ""
+    #{$prefix}#{$property}: $parameters
+
+@keyframes ghostAppears
+  0%
+    background-position: 40% center
+    opacity: 0
+    background-size: 85px
+  10%
+    opacity: 1
+    background-size: 100px
+  20%
+    background-position: 60% center
+    opacity: 0
+    background-size: 85px
+  40%, 100%
+    background-position: 40% center
+
+@keyframes ghostAnimated
+  0%
+    background-size: 400px
+    background-position: center center
+    opacity: 1
+  50%
+    background-size: 320px
+    background-position: center 60%
+    opacity: 0.7
+  100%
+    background-size: 400px
+    background-position: center center
+    opacity: 1
+  
+@keyframes youDied
+  0%
+    transform: scale(2)
+  50%
+    transform: scale(2.1)
+  100%
+    transform: scale(2)
+  
+*
+  padding: 0
+  margin: 0
+  box-sizing: border-box
+
+body
+  background: #000
+  padding: 20px 0
+  font: 20px "VT323", Monospace
+  text-transform: uppercase
+  letter-spacing: 1px
+  color: #fff
+  .container
+    width: 85rem
+    margin: 0 auto
+    .game-controls
+      padding: 30px 0
+      color: #fff
+      width: 92%
+      margin: 0 auto
+      &.dead
+        .timer, .battery
+          float: none
+      .timer
+        display: inline
+        float: left
+        font-size: 1.5em
+      .battery
+        float: right
+        font-size: 1.5em
+        strong
+          float: left
+          padding-right: 10px
+        ul
+          display: inline
+          list-style-type: none
+          li
+            float: left
+            color: $powerGreen
+            transition: color 2s ease
+            &.half
+              color: $powerYellow
+            &.empty
+              color: $powerRed
+   
+    .game
+      text-align: center
+      &.dead
+        .screen
+          display: none
+        #my_camera
+          display: inline-block
+          top: 150px
+      &.survived
+        #my_camera, .screen, .battery
+          display: none 
+      .screen
+        background-image: url($staticGif)
+        background-size: cover
+        background-position: center center
+        background-blend-mode: soft-light
+        display: inline-block
+        opacity: 0.5
+        width: 320px
+        height: 240px
+        padding-top: 10px
+        margin: 0
+        position: relative
+        overflow: hidden
+        border: 15px #000 solid
+        @include prefix(filter, grayscale(100%))
+        @include prefix(transform, scale(1.5), transform, scale(1.5), border-color, 0.5s ease-in-out, box-shadow, inset 0px 10px 45px 10px rgba(0,0,0,0.75))
+        z-index: 1
+        span
+          background-size: 100px auto
+          background-position: bottom center
+          background-repeat: no-repeat
+          display: inline-block
+          width: 100%
+          height: 100%
+          &.ghostly
+            @include prefix(animation, ghostAppears 6s infinite)
+            background-image: url($ghostSource)
+        &:hover
+          opacity: 0.8
+          cursor: pointer
+          z-index: 10
+        &:active
+          border-color: green
+        &.static
+          background-image: url($staticGif) !important
+          span
+            display: none
+        &.one
+          background-image: url($staticGif)
+        &.two
+          background-image: url($staticGif), url($screenTwo)
+        &.three
+          background-image: url($staticGif), url($screenThree)
+        &.four
+          @include prefix(animation, ghostAppears 0.01s infinite)
+          background-image: url($staticGif), url($screenFour)
+        &.five
+          @include prefix(animation, ghostAppears 0.01s infinite)
+          background-image: url($staticGif), url($screenFive)
+        &.six
+          background-image: url($staticGif), url($screenSix)
+        &.seven
+          background-image: url($staticGif), url($screenSeven)
+        &.eight
+          background-image: url($staticGif), url($screenEight)
+        &.nine
+          background-image: url($staticGif), url($screenNine)
+        &.ten
+          background-image: url($staticGif), url($screenTen)
+        &.eleven
+          @include prefix(animation, ghostAppears 0.05s infinite)
+          background-image: url($staticGif), url($screenEleven)
+        &.twelve
+          background-image: url($staticGif), url($screenTwelve)
+        &#my_camera
+          video
+            position: absolute
+            top: 0
+            left: 0
+            transform: scale(1.3) !important
+            overflow: hidden
+          &.dead
+            @include prefix(animation, youDied 0.1s infinite)
+            &:after
+              position: absolute
+              top: 0
+              left: 0
+              width: 100%
+              height: 100%
+              content: ''
+              background-image: url($ghostSource)
+              background-size: 600px
+              background-position: top center
+    .expanded-screen
+      background-repeat: no-repeat
+      background-size: cover
+      background-position: center center
+      background-blend-mode: soft-light
+      border: 0
+      position: absolute
+      left: 0
+      right: 0
+      top: -100%
+      margin: 0 auto
+      height: 705px
+      width: 85rem
+      z-index: 100
+      @include prefix(transition, top 0.5s ease-in-out, opacity 1s ease-in-out)
+      @include prefix(filter, grayscale(100%))
+      span
+        opacity: 0
+      &.active
+        top: 30px
+        span
+          background-image: url($ghostSource)
+          background-size: 600px
+          background-position: top center
+          background-repeat: no-repeat
+          display: block
+          position: relative
+          top: 0
+          left: 0
+          width: 100%
+          height: 100%
+          opacity: 1
+          @include prefix(animation, ghostAnimated 10s infinite)
+        a
+          position: relative
+          display: block
+          margin: 0 auto
+          bottom: 14rem
+          width: 150px
+          height: 150px
+          font-size: 1.5em
+          line-height: 148px
+          text-align: center
+          text-decoration: none
+          color: #fff
+          z-index: 100
+          background-color: rgba(0,0,0,0.3)
+          border: 4px #fff solid
+          @include prefix(box-shadow, inset 0px 0px 0px 0px rgba(255,255,255,0.75))
+          @include prefix(transition, box-shadow 3.3s ease, color 2s ease)
+          &:active
+            @include prefix(box-shadow, inset 150px 0px 0px 0px rgba(255,255,255,0.75))
+            color: #000
+            
