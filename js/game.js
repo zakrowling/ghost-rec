@@ -1,9 +1,9 @@
 // Global variables
 var totalScreens = 12;
-var timer = 60;
+var timer = 20;
 var points = 0;
 var winnerMsg = 'You survived the night';
-var loserMsg = 'You ran out of power';
+var loserMsg = 'You ran out of battery power';
 var staticDuration = 800;
 var screenDuration = 7000;
 var expandedScreen = false;
@@ -13,16 +13,35 @@ var beep = new Audio("js/beep.mp3");
 var audio = new Audio("js/static.mp3");
 
 // Initialise
-startGame();
+setLevel();
 setInterval(function() { playGame(); }, screenDuration);
 
-function startGame() {
+function getParameterByName(name, url) {
+  if (!url) url = window.location.href;
+  name = name.replace(/[\[\]]/g, '\\$&');
+  var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+      results = regex.exec(url);
+  if (!results) return null;
+  if (!results[2]) return '';
+  return decodeURIComponent(results[2].replace(/\+/g, ' '));
+}
+
+function setLevel() {
+  var level = getParameterByName("level");
+  var difficulty;
+  for (difficulty = 0;  difficulty < level; difficulty++) { 
+    $(".battery li:nth-child("+difficulty+")").remove();
+    if (difficulty > 3) {
+      screenDuration = 7000 / difficulty + 2000;
+      timer = difficulty * 10;
+    }
+  }
+  startGame(timer);
+}
+
+function startGame(timer) {
   $(".screen").addClass("static");
   $("h2.timer strong").text(timer);
-  $(".screen").attr("data-tilt-max", "5");
-  $(".screen").attr("data-tilt-axis", "x");
-  $(".screen").attr("data-tilt-transition", "true");
-  $(".screen").attr("data-tilt-perspective", "250");
 
   backgroundSound.addEventListener('ended', function() {
       this.currentTime = 0;
@@ -62,9 +81,6 @@ function playGame() {
         expandedScreen = false;
         shuffleScreens();
       }, 3200);
-      setTimeout(function() {
-        $(".expanded-screen .record").text('Done');
-      },3150);
   }).on('mouseup mouseleave', function() {
       clearTimeout(holdRecord);
       $(".expanded-screen .record").text('Record');
@@ -112,7 +128,7 @@ function drainBattery() {
 function restoreBattery() {
   $(".battery li:not(:last)").removeClass('empty half');
   $(".battery li:last").prev().addClass('half');
-  $(".game-controls .battery strong").text("Charging...");
+  $(".game-controls .battery strong").text("Recharging...");
   beep.play();
   beep.volume = 0.4;
 
@@ -122,13 +138,15 @@ function restoreBattery() {
 }
 
 function youLose() {
-  $('#my_camera, .game, .game-controls').addClass('survived');
-  $("h2.timer").text(loserMsg);
+  var nextLevel = parseInt(getParameterByName("level")) + 1;
+  $('.game, .game-controls').addClass('survived');
+  $("h2.timer").html(loserMsg + "<br><a href='javascript:location.reload();'>Try Again</a>");
   $("h3.battery").hide();
 }
 
 function youWin() {
-  $('#my_camera, .game, .game-controls').addClass('survived');
-  $("h2.timer").text(winnerMsg);
+  var nextLevel = parseInt(getParameterByName("level")) + 1;
+  $('.game, .game-controls').addClass('survived');
+  $("h2.timer").html(winnerMsg + "<br><a href='index.html?level=" + nextLevel +"'>Next Level</a>");
   $("h3.battery").hide();
 }
