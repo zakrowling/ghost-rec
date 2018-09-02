@@ -1,19 +1,19 @@
 // Variables
 
-$staticGif: "http://i.filmot.org/6oyqOt8.gif"
-$screenOne: "http://i.filmot.org/qTFppZ4.jpg"
-$screenTwo: "http://i.filmot.org/6Ap2Qtw.jpg"
-$screenThree: "http://i.filmot.org/BSbeZzr.jpg"
-$screenFour: "http://i.filmot.org/kbVKg58.jpg"
-$screenFive: "http://i.filmot.org/8lLaKCH.jpg"
-$screenSix: "http://i.filmot.org/2ZqEiIo.jpg"
-$screenSeven: "http://i.filmot.org/aH8OFCE.jpg"
-$screenEight: "http://i.filmot.org/yhvqKhq.jpg"
-$screenNine: "http://i.filmot.org/UmhBW5l.jpg"
-$screenTen: "http://i.filmot.org/zfKSqKc.jpg"
-$screenEleven: "http://i.filmot.org/a3MT70G.jpg"
-$screenTwelve: "http://i.filmot.org/8o5J5U4.jpg"
-$ghostSource: "http://www.grimmghosttours.com/images/multiple%20ghosts-crazy%20woman.png"
+$staticGif: "img/static.gif"
+$screenOne: "img/hospital-scene/image01.jpg"
+$screenTwo: "img/hospital-scene/image02.jpg"
+$screenThree: "img/hospital-scene/image03.jpg"
+$screenFour: "img/hospital-scene/image04.jpg"
+$screenFive: "img/hospital-scene/image05.jpg"
+$screenSix: "img/hospital-scene/image06.jpg"
+$screenSeven: "img/hospital-scene/image07.jpg"
+$screenEight: "img/hospital-scene/image08.jpg"
+$screenNine: "img/hospital-scene/image09.jpg"
+$screenTen: "img/hospital-scene/image10.jpg"
+$screenEleven: "img/hospital-scene/image11.jpg"
+$screenTwelve: "img/hospital-scene/image12.jpg"
+$ghostSource: "img/ghost.png"
 
 // Colours
 $powerGreen: #2aae51
@@ -47,7 +47,7 @@ $powerRed: #eb1c51
   50%
     background-size: 320px
     background-position: center 60%
-    opacity: 0.7
+    opacity: 0.8
   100%
     background-size: 400px
     background-position: center center
@@ -214,7 +214,7 @@ body
       height: 705px
       width: 85rem
       z-index: 100
-      @include prefix(transition, top 0.5s ease-in-out, opacity 1s ease-in-out)
+      @include prefix(transition, top 0.3s ease-in, opacity 1s ease-in-out)
       @include prefix(filter, grayscale(100%))
       span
         opacity: 0
@@ -240,7 +240,7 @@ body
           bottom: 14rem
           width: 150px
           height: 150px
-          font-size: 1.5em
+          font-size: 1.25em
           line-height: 148px
           text-align: center
           text-decoration: none
@@ -249,7 +249,7 @@ body
           background-color: rgba(0,0,0,0.3)
           border: 4px #fff solid
           @include prefix(box-shadow, inset 0px 0px 0px 0px rgba(255,255,255,0.75))
-          @include prefix(transition, box-shadow 3.3s ease, color 2s ease)
+          @include prefix(transition, box-shadow 3.3s linear, color 2s linear)
           &:active
             @include prefix(box-shadow, inset 150px 0px 0px 0px rgba(255,255,255,0.75))
             color: #000

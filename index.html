@@ -9,7 +9,7 @@
 <body>
   <div class="container">
     <div class="game">
-      <div class="screen one" id="my_camera">Camera 1</div>
+      <div class="screen one" data-tilt>Camera 1</div>
       <div class="screen two" data-tilt>Camera 2<span></span></div>
       <div class="screen three" data-tilt>Camera 3<span></span></div>
       <div class="screen four" data-tilt>Camera 4<span></span></div>
@@ -23,7 +23,7 @@
       <div class="screen twelve" data-tilt>Camera 12<span></span></div>
     </div>
     <div class="game-controls">
-      <h2 class="timer"><strong>99</strong> minutes until sunrise</h2>
+      <h2 class="timer"><strong>30</strong> minutes until sunrise</h2>
       <h3 class="battery"><strong>Battery</strong>
         <ul>
           <li>&#9619;</li>
@@ -39,11 +39,16 @@
     </div>
     <div class="expanded-screen">
       <span></span>
-      <a href="javascript:record();">Record</a>
+      <a href="javascript:record();" class="record">Record</a>
     </div>
   </div>
 </body>
+<div style="display:none">
+  <audio controls loop autoplay>
+    <source src="js/heartbeat.mp3" type="audio/mpeg">
+  </audio>
+</div>
 <script src="https://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
+<script src="js/tiltfx.js"></script>
 <script src="js/game.js" type="text/javascript"></script>
-<script src="https://pixlcore.com/demos/webCamerajs/webCamera.min.js"></script>
 </html>
