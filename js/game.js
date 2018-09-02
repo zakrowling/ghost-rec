@@ -7,13 +7,15 @@ var loserMsg = 'You ran out of battery power';
 var staticDuration = 800;
 var screenDuration = 7000;
 var expandedScreen = false;
+var level = getParameterByName("level");
 
 var backgroundSound = new Audio("js/heartbeat.mp3"); 
 var beep = new Audio("js/beep.mp3");
 var audio = new Audio("js/static.mp3");
 
 // Initialise
-setLevel();
+setLevel(level);
+shuffleScreens();
 setInterval(function() { playGame(); }, screenDuration);
 
 function getParameterByName(name, url) {
@@ -26,8 +28,7 @@ function getParameterByName(name, url) {
   return decodeURIComponent(results[2].replace(/\+/g, ' '));
 }
 
-function setLevel() {
-  var level = getParameterByName("level");
+function setLevel(level) {
   var difficulty;
   for (difficulty = 0;  difficulty < level; difficulty++) { 
     $(".battery li:nth-child("+difficulty+")").remove();
@@ -42,6 +43,7 @@ function setLevel() {
 function startGame(timer) {
   $(".screen").addClass("static");
   $("h2.timer strong").text(timer);
+  $("h2.timer em").text("[Shift " + level+ "]");
 
   backgroundSound.addEventListener('ended', function() {
       this.currentTime = 0;
@@ -147,6 +149,6 @@ function youLose() {
 function youWin() {
   var nextLevel = parseInt(getParameterByName("level")) + 1;
   $('.game, .game-controls').addClass('survived');
-  $("h2.timer").html(winnerMsg + "<br><a href='index.html?level=" + nextLevel +"'>Next Level</a>");
+  $("h2.timer").html(winnerMsg + "<br><a href='index.html?level=" + nextLevel +"'>Next Shift</a>");
   $("h3.battery").hide();
 }
