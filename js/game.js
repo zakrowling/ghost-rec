@@ -7,11 +7,15 @@ var loserMsg = 'You ran out of battery power';
 var staticDuration = 800;
 var screenDuration = 7000;
 var expandedScreen = false;
-var level = getParameterByName("level");
-
 var backgroundSound = new Audio("js/heartbeat.mp3"); 
 var beep = new Audio("js/beep.mp3");
 var audio = new Audio("js/static.mp3");
+
+// If no level set then default to first level
+var level = getParameterByName("level");
+if (!window.location.search) {
+  window.location = 'index.html?level=1';
+}
 
 // Initialise
 setLevel(level);
@@ -61,7 +65,6 @@ function startGame(timer) {
   }, 3000);
 }
 
-  
 function playGame() {
   shuffleScreens();
   drainBattery();
