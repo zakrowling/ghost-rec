@@ -154,7 +154,7 @@ function youLose() {
   $("h2.timer").html(loserMsg + "<br><a href='javascript:location.reload();'>Try Again</a>");
   $("h3.battery").hide();
   setTimeout(function() {
-    window.navigate("index.html");
+    window.navigate("index.html?level=1");
   }, restartDelay);
 }
 
