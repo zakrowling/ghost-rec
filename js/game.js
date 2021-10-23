@@ -76,7 +76,7 @@ function playGame() {
   
   $(".screen span.ghostly").click(function() {
     expandedScreen = true;
-    $(".expanded-screen .record").text('Hold to Record');
+    $(".expanded-screen .record").text('Hold Record');
     var screenBackground = $(this).parent('.screen').css('background-image');
     $(".expanded-screen").addClass('active');
     $(".expanded-screen").css('background-image', screenBackground);
@@ -93,7 +93,7 @@ function playGame() {
       }, 3200);
   }).on('mouseup mouseleave', function() {
       clearTimeout(holdRecord);
-      $(".expanded-screen .record").text('Record');
+      $(".expanded-screen .record").text('Hold Record');
   });
  
   setTimeout(function() {
