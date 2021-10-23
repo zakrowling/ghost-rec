@@ -149,9 +149,13 @@ function restoreBattery() {
 
 function youLose() {
   var nextLevel = parseInt(getParameterByName("level")) + 1;
+  var restartDelay = 5000;
   $('.game, .game-controls').addClass('survived');
   $("h2.timer").html(loserMsg + "<br><a href='javascript:location.reload();'>Try Again</a>");
   $("h3.battery").hide();
+  setTimeout(function() {
+    window.navigate("index.html");
+  }, restartDelay);
 }
 
 function youWin() {
