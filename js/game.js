@@ -161,6 +161,6 @@ function youLose() {
 function youWin() {
   var nextLevel = parseInt(getParameterByName("level")) + 1;
   $('.game, .game-controls').addClass('survived');
-  $("h2.timer").html(winnerMsg + "<br><a href='index.html?level=" + nextLevel +"'>Next Shift</a>");
+  $("h2.timer").html(winnerMsg + "<br><a href='game.html?level=" + nextLevel +"'>Next Shift</a>");
   $("h3.battery").hide();
 }
