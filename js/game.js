@@ -151,7 +151,7 @@ function youLose() {
   var nextLevel = parseInt(getParameterByName("level")) + 1;
   var restartDelay = 5000;
   $('.game, .game-controls').addClass('survived');
-  $("h2.timer").html(loserMsg + "<br><a href='javascript:location.reload();'>Try Again</a>");
+  $("h2.timer").html(loserMsg + "<br><a href='index.html?level=1'>Try Again</a>");
   $("h3.battery").hide();
   setTimeout(function() {
     window.location = 'index.html?level=1';
