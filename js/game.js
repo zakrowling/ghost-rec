@@ -13,8 +13,8 @@ var audio = new Audio("js/static.mp3");
 
 // If no level set then default to first level
 var level = getParameterByName("level");
-if (!window.location.search) {
-  window.location = 'index.html?level=1';
+if (!window.location.search || window.location.pathname != "/" || window.location.pathname != "/index.html") {
+  window.location = 'game.html?level=1';
   playMusic();
 }
 
