@@ -2,7 +2,7 @@
 var totalScreens = 12;
 var timer = 20;
 var points = 0;
-var winnerMsg = 'Good job, you made it through your shift';
+var winnerMsg = 'Good job, you made it through your shift.';
 var loserMsg = 'Oh no, the spirit drained the power.';
 var staticDuration = 800;
 var screenDuration = 7000;
