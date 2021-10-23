@@ -2,8 +2,8 @@
 var totalScreens = 12;
 var timer = 20;
 var points = 0;
-var winnerMsg = 'You made it through your shift';
-var loserMsg = 'You ran out of battery power';
+var winnerMsg = 'Good job, you made it through your shift';
+var loserMsg = 'Oh no, the spirit drained the power.';
 var staticDuration = 800;
 var screenDuration = 7000;
 var expandedScreen = false;
