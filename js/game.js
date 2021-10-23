@@ -2,7 +2,7 @@
 var totalScreens = 12;
 var timer = 20;
 var points = 0;
-var winnerMsg = 'You survived the night';
+var winnerMsg = 'You made it through your shift';
 var loserMsg = 'You ran out of battery power';
 var staticDuration = 800;
 var screenDuration = 7000;
